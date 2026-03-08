@@ -1,35 +1,35 @@
 // ---- CUSTOM CURSOR ----
 const cursor = document.getElementById('cursor');
-const ring   = document.getElementById('cursorRing');
+const ring = document.getElementById('cursorRing');
 let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
 
 document.addEventListener('mousemove', e => {
   mouseX = e.clientX; mouseY = e.clientY;
   cursor.style.left = mouseX + 'px';
-  cursor.style.top  = mouseY + 'px';
+  cursor.style.top = mouseY + 'px';
 });
 
 function animateRing() {
   ringX += (mouseX - ringX) * 0.12;
   ringY += (mouseY - ringY) * 0.12;
   ring.style.left = ringX + 'px';
-  ring.style.top  = ringY + 'px';
+  ring.style.top = ringY + 'px';
   requestAnimationFrame(animateRing);
 }
 animateRing();
 
 document.querySelectorAll('a, button, .project-card, .skill-card, .exp-card').forEach(el => {
   el.addEventListener('mouseenter', () => {
-    cursor.style.width  = '20px';
+    cursor.style.width = '20px';
     cursor.style.height = '20px';
-    ring.style.width    = '56px';
-    ring.style.height   = '56px';
+    ring.style.width = '56px';
+    ring.style.height = '56px';
   });
   el.addEventListener('mouseleave', () => {
-    cursor.style.width  = '12px';
+    cursor.style.width = '12px';
     cursor.style.height = '12px';
-    ring.style.width    = '36px';
-    ring.style.height   = '36px';
+    ring.style.width = '36px';
+    ring.style.height = '36px';
   });
 });
 
@@ -38,6 +38,90 @@ window.addEventListener('scroll', () => {
   document.getElementById('navbar').style.boxShadow =
     window.scrollY > 20 ? '0 2px 24px rgba(0,0,0,0.5)' : 'none';
 });
+
+/* ============================================================
+   CERTIFICATE LIGHTBOX
+============================================================ */
+const certGrid = document.querySelector('.cert-grid');
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbClose = document.getElementById('lbClose');
+
+if (certGrid) {
+  certGrid.addEventListener('click', (e) => {
+    const card = e.target.closest('.cert-card');
+    if (!card) return;
+    const imgUrl = card.getAttribute('data-img');
+    if (imgUrl) {
+      lbImg.src = imgUrl;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden'; // prevent bg scroll
+    }
+  });
+}
+
+if (lightbox) {
+  lbClose.addEventListener('click', () => {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = 'auto'; // restore scroll
+  });
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+  });
+}
+
+/* ============================================================
+   ACTIVITIES & EVENTS MODAL
+============================================================ */
+const expCards = document.querySelectorAll('.exp-card');
+const actModal = document.getElementById('actModal');
+const actClose = document.getElementById('actClose');
+const actModalImg = document.getElementById('actModalImg');
+const actModalTitle = document.getElementById('actModalTitle');
+const actModalMeta = document.getElementById('actModalMeta');
+const actModalDesc = document.getElementById('actModalDesc');
+
+document.body.addEventListener('click', (e) => {
+  // Check if click was on an exp-card or inside an exp-card
+  const card = e.target.closest('.exp-card');
+  if (!card) return;
+
+  const imgUrl = card.getAttribute('data-img');
+  const title = card.getAttribute('data-title');
+  const meta = card.getAttribute('data-meta');
+  const desc = card.getAttribute('data-desc');
+
+  // Only open if there is data
+  if (imgUrl || title) {
+    if (imgUrl) actModalImg.src = imgUrl;
+    if (title) actModalTitle.textContent = title;
+
+    // Allow HTML in meta/desc for things like &bull;
+    if (meta) actModalMeta.innerHTML = meta;
+    if (desc) actModalDesc.innerHTML = desc;
+
+    actModal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // prevent outer scroll
+  }
+});
+
+if (actModal) {
+  actClose.addEventListener('click', () => {
+    actModal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  });
+
+  actModal.addEventListener('click', (e) => {
+    // If user clicks the dark background (outside the modal dialog)
+    if (e.target === actModal) {
+      actModal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+  });
+}
 
 // ---- HAMBURGER ----
 const ham = document.getElementById('hamburger');
@@ -94,8 +178,8 @@ filterBtns.forEach(btn => {
     const filter = btn.dataset.filter;
     projectCards.forEach(card => {
       const match = filter === 'all' || card.dataset.category === filter;
-      card.style.opacity    = match ? '1' : '0.2';
-      card.style.transform  = match ? '' : 'scale(0.97)';
+      card.style.opacity = match ? '1' : '0.2';
+      card.style.transform = match ? '' : 'scale(0.97)';
       card.style.pointerEvents = match ? 'auto' : 'none';
     });
   });

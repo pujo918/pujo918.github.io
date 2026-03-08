@@ -283,7 +283,7 @@ ul { list-style: none; }
    SECTIONS — SHARED
 ============================================================ */
 section { padding: 120px 40px; }
-.section-inner { max-width: 1300px; margin: 0 auto; }
+.section-inner { max-width: 1300px; margin: 0 auto; position: relative; z-index: 1; }
 .section-label {
   font-family: var(--font-mono);
   font-size: 0.7rem;
