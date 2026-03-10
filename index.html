@@ -74,103 +74,10 @@
       cursor: none;
     }
 
-    .page-loader {
-      position: fixed;
-      inset: 0;
-      z-index: 99999;
-      background: rgba(10, 10, 10, 0.96);
-      backdrop-filter: blur(16px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.45s ease, visibility 0.45s ease;
-    }
-
-    .page-loader.hide {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .loader-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .loader-brand {
-      font-family: var(--font-display);
-      font-size: clamp(3.2rem, 10vw, 6rem);
-      letter-spacing: 3px;
-      line-height: 1;
-      color: var(--white);
-      text-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
-    }
-
-    .loader-brand span {
-      color: var(--accent);
-    }
-
-    .loader-brand-outline {
-      font-family: var(--font-display);
-      font-size: clamp(1.2rem, 3vw, 1.6rem);
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: transparent;
-      -webkit-text-stroke: 1px rgba(240, 237, 230, 0.30);
-    }
-
-    .loader-bar {
-      width: min(520px, 78vw);
-      height: 2px;
-      border-radius: 2px;
-      background: rgba(255, 255, 255, 0.10);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .loader-bar::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 45%;
-      background: linear-gradient(90deg, rgba(200, 255, 0, 0), rgba(200, 255, 0, 1), rgba(200, 255, 0, 0));
-      animation: loaderBar 1.05s ease-in-out infinite;
-    }
-
-    .loader-percent {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(240, 237, 230, 0.92);
-      text-shadow: 0 0 18px rgba(200, 255, 0, 0.12);
-    }
-
-    .loader-text {
-      font-family: var(--font-body);
-      font-size: 0.78rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(240, 237, 230, 0.68);
-    }
-
-    @keyframes loaderBar {
-      0% {
-        transform: translateX(-120%);
-      }
-
-      100% {
-        transform: translateX(280%);
-      }
-    }
-
     a {
       text-decoration: none;
       color: inherit;
-    }
+      }
 
     ul {
       list-style: none;
@@ -1399,6 +1306,7 @@
 ============================================================ */
     #contact {
       background: var(--bg);
+      border-top: 1px solid var(--border);
     }
 
     .contact-grid {
@@ -1760,10 +1668,12 @@
       border-top: 1px solid var(--border);
       padding: 28px 40px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
+      justify-content: space-between;
       gap: 12px;
+      background: var(--bg);
+      position: relative;
+      z-index: 3;
     }
 
     .footer-logo {
@@ -1780,24 +1690,23 @@
     footer p {
       font-family: var(--font-mono);
       font-size: 0.68rem;
-      color: var(--gray2);
+      color: rgba(240, 237, 230, 0.88);
       letter-spacing: 0.08em;
     }
 
     /* ============================================================
-   ANIMATIONS
+  ANIMATIONS
 ============================================================ */
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
     .reveal {
       opacity: 0;
@@ -2002,16 +1911,6 @@
 </head>
 
 <body>
-
-  <div class="page-loader" id="pageLoader" aria-label="Loading" role="status">
-    <div class="loader-inner">
-      <div class="loader-brand"><span>PORT</span>OKU</div>
-      <div class="loader-brand-outline">Portfolio Loading</div>
-      <div class="loader-bar" aria-hidden="true"></div>
-      <div class="loader-percent" id="loaderPercent">0%</div>
-      <div class="loader-text">Loading</div>
-    </div>
-  </div>
 
   <div class="cert-lightbox" id="certLightbox" aria-hidden="true">
     <div class="cert-lightbox-inner" role="dialog" aria-modal="true" aria-label="Certificate preview">
@@ -2764,7 +2663,11 @@
           <div class="contact-links">
             <a href="https://mail.google.com/mail/?view=cm&fs=1&to=pujolestarionohadisaputro@gmail.com" target="_blank"
               rel="noopener" class="contact-pill">✉ Email</a>
-            <a href="tel:+6285655904335" class="contact-pill">☎ Phone</a>
+            <a href="https://www.linkedin.com/in/pujo-lestarionohs/" target="_blank" rel="noopener" class="contact-pill"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-12h4v2a4 4 0 0 1 2-2z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>LinkedIn</a>
             <a href="https://github.com/pujo918" target="_blank" rel="noopener" class="contact-pill">⌥ GitHub</a>
             <a href="https://www.instagram.com/pujo_pst?igsh=MTk5eGdkanZzZ3g3cw==" target="_blank" rel="noopener"
               class="contact-pill"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"
@@ -2779,23 +2682,23 @@
           <div class="form-row">
             <div class="form-group">
               <label>Nama Lengkap</label>
-              <input id="contactName" type="text" placeholder="Nama kamu..." />
+              <input id="contactName" type="text" placeholder="Your Name..." />
             </div>
             <div class="form-group">
               <label>Alamat Email</label>
-              <input id="contactEmail" type="email" placeholder="email@kamu.com" />
+              <input id="contactEmail" type="email" placeholder="email@Your.com" />
             </div>
           </div>
           <div class="form-group">
             <label>Judul</label>
-            <input id="contactSubject" type="text" placeholder="Perihal pesan..." />
+            <input id="contactSubject" type="text" placeholder="About the message..." />
           </div>
           <div class="form-group">
             <label>Isi Pesan</label>
-            <textarea id="contactMessage" placeholder="Tulis pesanmu di sini..."></textarea>
+            <textarea id="contactMessage" placeholder="Write your message here..."></textarea>
           </div>
           <button class="btn-submit" type="button" onclick="handleSubmit(this)">
-            Kirim Pesan <span class="arrow">→</span>
+            Send message <span class="arrow">→</span>
           </button>
         </div>
       </div>
@@ -3102,54 +3005,6 @@
 
     // ---- FOOTER YEAR ----
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // ---- PAGE LOADER ----
-    (() => {
-      const loader = document.getElementById('pageLoader');
-      const percentEl = document.getElementById('loaderPercent');
-      if (!loader || !percentEl) return;
-
-      const minShowMs = 300;
-      const startTs = Date.now();
-      let pct = 0;
-      let done = false;
-
-      const tick = () => {
-        if (done) return;
-
-        const elapsed = Date.now() - startTs;
-        const cap = elapsed < 200 ? 80 : 96;
-        const step = Math.max(2, Math.floor(Math.random() * 8));
-        pct = Math.min(cap, pct + step);
-        percentEl.textContent = pct + '%';
-      };
-
-      const interval = setInterval(tick, 30);
-
-      const finishAndHide = () => {
-        const finalize = () => {
-          clearInterval(interval);
-          done = true;
-
-          const fast = setInterval(() => {
-            pct = Math.min(100, pct + 8);
-            percentEl.textContent = pct + '%';
-            if (pct >= 100) {
-              clearInterval(fast);
-              setTimeout(() => {
-                loader.classList.add('hide');
-                setTimeout(() => loader.remove(), 400);
-              }, 50);
-            }
-          }, 10);
-        };
-
-        const remaining = Math.max(0, minShowMs - (Date.now() - startTs));
-        setTimeout(finalize, remaining);
-      };
-
-      window.addEventListener('load', finishAndHide);
-    })();
 
     // ---- HERO CANVAS ANIMATION ----
     (() => {
